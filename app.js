@@ -1,7 +1,8 @@
 
 
 //Concentration
-
+console.log("linked!");
+$(document).ready(function(){
 
 //Can pick amount of pairs of cards in the game
 //Can choose difficulty of the game
@@ -18,6 +19,11 @@
       //findWinner
       //add player
 
+function MakePlayer(name){
+    this.name = name;
+    this.scoreTracker = 0;
+  }
+
 function Card(number){
   this.number = number;
   this.active = false;
@@ -28,9 +34,11 @@ function GameBoard(){
 
   var cards = [];
   var shuffledCards = [];
+  var newBoard = '<div class="card"></div>';
 
   for(var i = 0; i < this.cardNames.length; i++){
     cards.push(new Card(this.cardNames[i]));
+    $("#wrapper").append(newBoard);
   }
   for(var j = 0; j <= cards.length; j++){
     var randomNumber = Math.floor(Math.random() * cards.length) + 1;
@@ -39,27 +47,13 @@ function GameBoard(){
   return shuffledCards;
 }
 
-// GameBoard.prototype.shuffle = function(){
-  
-//   for(var i = 0; i <= cards.length; i++){
-//     var randomNumber = Math.floor(Math.random() * cards.length) + 1;
-//     shuffledCards.push(cards[randomNumber]);
-//   }
-//   return shuffledCards;
-// };
-
-// GameBoard.prototype.makeCards = function(typeOfCards){
-//   for(var i = 0; i < typeOfCards.length; i++){
-//     var card = new Card(typeOfCards[i]);
-//   }
-  
-// };
+ 
 
 
-// GameBoard.prototype.makeBorad = function(){
-//   var newBoard = $.create("div");
-//   $.append(newBoard);
-// };
+
+
+
+});
 
 // var makeBorad = function(){
 //   var newBoard = $.create("div");
@@ -86,10 +80,7 @@ function GameBoard(){
   //player
     //score tracker
     //
-  function MakePlayer(name){
-    this.name = name;
-    this.scoreTracker = 0;
-  }
+  
 
 
 

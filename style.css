@@ -1,0 +1,12 @@
+
+#wrapper{
+	position: relative;
+}
+
+.card{
+	height: 6em;
+	width: 4rem;
+	position: absolute;
+	background-color: black;
+	display: inline-block;
+}

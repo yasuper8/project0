@@ -47,7 +47,7 @@ function GameBoard(){
   return shuffledCards;
 }
 
- 
+ $("#makeCardsBtn").on("click", GameBoard);
 
 
 

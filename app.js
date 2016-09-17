@@ -27,12 +27,26 @@ function GameBoard(){
   this.cardNames = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 
   var cards = [];
+  var shuffledCards = [];
 
   for(var i = 0; i < this.cardNames.length; i++){
     cards.push(new Card(this.cardNames[i]));
   }
-  return cards;
+  for(var j = 0; j <= cards.length; j++){
+    var randomNumber = Math.floor(Math.random() * cards.length) + 1;
+    shuffledCards.push(cards[randomNumber]);
+  }
+  return shuffledCards;
 }
+
+// GameBoard.prototype.shuffle = function(){
+  
+//   for(var i = 0; i <= cards.length; i++){
+//     var randomNumber = Math.floor(Math.random() * cards.length) + 1;
+//     shuffledCards.push(cards[randomNumber]);
+//   }
+//   return shuffledCards;
+// };
 
 // GameBoard.prototype.makeCards = function(typeOfCards){
 //   for(var i = 0; i < typeOfCards.length; i++){

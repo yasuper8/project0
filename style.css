@@ -1,12 +1,39 @@
 
-#wrapper{
+#game-board{
 	position: relative;
+}
+
+
+h1{
+	font-family: 'Space Mono', monospace;
+	text-align: center;
 }
 
 .card{
 	height: 6em;
 	width: 4rem;
-	position: absolute;
+	/*position: absolute;*/
 	background-color: black;
-	display: inline-block;
+	display: block;
+	border-radius: 10px;
+	float: left;
+	padding-left: 10px;
+	margin: 3.5rem 1rem;
 }
+
+#makeCardsBtn{
+	padding:10px;
+	position: absolute;
+}
+
+#button{
+	margin-bottom: 2rem;
+	position: absolute;
+	display: block
+
+}
+#cardTitile{
+	color: white;
+}
+
+

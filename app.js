@@ -17,7 +17,10 @@ function Card(number){
 
 function GameBoard(){
   this.cardNames = ["one", "one", "two", "two", "three", "three", "four", "four", "five", "five", "six", "six", "seven", "seven", "eight", "eight", "nine", "nine", "ten", "ten", "J", "J", "Q", "Q", "K", "K"];
-  this.cardFlipped = 0;
+  // this.cardFlipped = 0;
+  this.showAlert = function(){
+    alert("onclick Event detected!");
+  };
 
   var deckOfCards = [];
   var shuffledCards = [];
@@ -25,14 +28,76 @@ function GameBoard(){
   for(var i = 0; i < this.cardNames.length; i++){
     deckOfCards.push(new Card(this.cardNames[i]));
   }
+
+
   for(var j = 0; j <= deckOfCards.length; j++){
     var randomNumber = Math.floor(Math.random() * deckOfCards.length);
     shuffledCards.push(deckOfCards[randomNumber]);
-    $("#game-board").append('<div class="card" id="card ' + deckOfCards[randomNumber].number + '" onclick="flip()">' + deckOfCards[randomNumber].number + '</div>');
+    var nameOfCard = deckOfCards[randomNumber].number;
+    // var idNameOfCard = "#" + deckOfCards[randomNumber].number;
+    // var targetCart = document.getElementById(nameOfCard);
+    // targetCart.onclick = showAlert;
+    var htmlOutput = '<div class="card" id="card ' + nameOfCard + '" onclick="#">' + nameOfCard + '</div>';
+    $("#game-board").append(htmlOutput);
   }
   console.log(shuffledCards);
   return shuffledCards;
 }
+
+window.onload = GameBoard();
+
+var cardPairPicked = [];
+
+$(".card").on('click', function(e) {
+  this.style.backgroundColor = "lightgray";
+var cardValue = this.innerHTML;
+
+console.log(cardValue);
+cardPairPicked.push(cardValue);
+
+
+  setTimeout(flipBackCard, 2000);
+
+});
+
+
+function checkArray (arr){
+  if(arr.length == 2){
+    isMatch(arr);
+  }
+}
+
+
+function isMatch (cardPairPicked){
+  if(cardPairPicked[0] === cardPairPicked[1]){
+  alert("You found a match!");
+  $(".alert").alert('close');
+  
+  } else {
+  alert("Sorry, try again.");
+  // $(".alertTwo").alert();
+  
+  }
+}
+
+function flipBackCard(){
+  $(".card").css("backgroundColor", "black");
+}
+
+
+// function shuffleArray(array) {
+//     for (var i = array.length - 1; i > 0; i--) {
+//         var j = Math.floor(Math.random() * (i + 1));
+//         var temp = array[i];
+//         array[i] = array[j];
+//         array[j] = temp;
+//     }
+//     return array;
+// }
+
+
+
+
 
 //Shuffle/////////////
  var removeCards = function() {
@@ -46,31 +111,33 @@ function reset(){
   GameBoard();
 }
 
-$("#makeCardsBtn").on("click", reset);
+$("#shuffleBtn").on("click", reset);
 
 //Shuffle ends//////////
 
 
+// flip2Back(){
+//             // Flip the 2 tiles back over
+//             var tile_1 = document.getElementById(memory_tile_ids[0]);
+//             var tile_2 = document.getElementById(memory_tile_ids[1]);
+//             tile_1.style.background = 'url(tile_bg.jpg) no-repeat';
+//                   tile_1.innerHTML = "";
+//             tile_2.style.background = 'url(tile_bg.jpg) no-repeat';
+//                   tile_2.innerHTML = "";
+//             // Clear both arrays
+//             memory_values = [];
+//                   memory_tile_ids = [];
+//         }
+//         setTimeout(flip2Back, 700);
+//       }
+//     }
+//   }
+// }
 
 
 
-$("#card").on("click", flip);
 
-// $( "#card" ).click(function() {
-//   alert( "Handler for .click() called." );
-// });
-
-window.onload = GameBoard();
-
-var flip = function(){
-  
-  alert("flip() called!");
-
-
-  // var card = "#"  + deckOfCards[randomNumber].number;
-  // $(this).css("background-color", "lightgray");
-
-  // var cardPairPicked = [];
+// var cardPairPicked = [];
   // var cardValue = document.getElementById("two");
   // cardPairPicked.push(cardValue);
   //   if(cardValue.html === "" & cardPairPicked.length < 2){
@@ -78,7 +145,7 @@ var flip = function(){
   //     console.log(cardValue);
   //   }
 
-};
+
 
 
 // function flipCard(){
@@ -132,11 +199,10 @@ var flip = function(){
  //      // cardsInPlay = [];
  //    }
  //  }
-  
 
 
 
-}); //end .deady
+}); //end .deady////////////////
 
 
 

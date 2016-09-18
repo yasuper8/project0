@@ -28,14 +28,57 @@ function GameBoard(){
   for(var j = 0; j <= deckOfCards.length; j++){
     var randomNumber = Math.floor(Math.random() * deckOfCards.length);
     shuffledCards.push(deckOfCards[randomNumber]);
-    $("#game-board").append('<div class="card" id="card ' + deckOfCards[randomNumber].number + '" onclick="#"></div>');
+    $("#game-board").append('<div class="card" id="card ' + deckOfCards[randomNumber].number + '" onclick="flip()">' + deckOfCards[randomNumber].number + '</div>');
   }
   console.log(shuffledCards);
   return shuffledCards;
 }
 
- $("#makeCardsBtn").on("click", GameBoard);
+//Shuffle/////////////
+ var removeCards = function() {
+ //  var gameBoard = document.getElementById('card');
+ // gameBoard.parentNode.removeChild(gameBoard);
+ $(".card").remove();
+};
 
+function reset(){
+  removeCards();
+  GameBoard();
+}
+
+$("#makeCardsBtn").on("click", reset);
+
+//Shuffle ends//////////
+
+
+
+
+
+$("#card").on("click", flip);
+
+// $( "#card" ).click(function() {
+//   alert( "Handler for .click() called." );
+// });
+
+window.onload = GameBoard();
+
+var flip = function(){
+  
+  alert("flip() called!");
+
+
+  // var card = "#"  + deckOfCards[randomNumber].number;
+  // $(this).css("background-color", "lightgray");
+
+  // var cardPairPicked = [];
+  // var cardValue = document.getElementById("two");
+  // cardPairPicked.push(cardValue);
+  //   if(cardValue.html === "" & cardPairPicked.length < 2){
+  //   cardValue.style.background = "lightgray";
+  //     console.log(cardValue);
+  //   }
+
+};
 
 
 // function flipCard(){
@@ -53,11 +96,7 @@ function GameBoard(){
 //   for(var i = 1; i <= 2; i++){
 //     func();
 //   }
-// }
-// var removeCards = function() {
-//   var gameBoard = document.getElementById('game-board');
-//  gameBoard.parentNode.removeChild(gameBoard);
-// };
+// 
 
 
 

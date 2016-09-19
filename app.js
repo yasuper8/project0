@@ -1,108 +1,59 @@
 
-
-//Concentration
 console.log("linked!");
 $(document).ready(function(){
 
+window.onload = GameBoard();
 
-// function MakePlayer(name){
-//     this.name = name;
-//     this.scoreTracker = 0;
-//   }
-
+/**
+* Card Constructor
+*/
 function Card(number){
   this.number = number;
   this.active = false;
 }
 
+/**
+* Game Constructor
+*/
+
 function GameBoard(){
-  this.cardNames = ["one", "one", "two", "two", "three", "three", "four", "four", "five", "five", "six", "six", "seven", "seven", "eight", "eight", "nine", "nine", "ten", "ten", "J", "J", "Q", "Q", "K", "K"];
+  this.cardNamesFull = ["one", "one", "two", "two", "three", "three", "four", "four", "five", "five", "six", "six", "seven", "seven", "eight", "eight", "nine", "nine", "ten", "ten", "J", "J", "Q", "Q", "K", "K"];
+  this.cardNames = [1, "1", 2, "2", 3, "3", 4, "4", 5, "5", 6, "6"];
+  this.colorNames = ["red", "red", "yellow", "yellow", "blue", "blue", "green", "green"];
+
   // this.cardFlipped = 0;
-  this.showAlert = function(){
-    alert("onclick Event detected!");
-  };
-
-  var deckOfCards = [];
   var shuffledCards = [];
+  var deckOfCards = [];
   
-  for(var i = 0; i < this.cardNames.length; i++){
+    for(var i = 0; i < this.cardNames.length; i++){
     deckOfCards.push(new Card(this.cardNames[i]));
-  }
+    }
+    shuffledCards = shuffleArray(cardNames);
 
-
-  for(var j = 0; j <= deckOfCards.length; j++){
-    var randomNumber = Math.floor(Math.random() * deckOfCards.length);
-    shuffledCards.push(deckOfCards[randomNumber]);
-    var nameOfCard = deckOfCards[randomNumber].number;
-    // var idNameOfCard = "#" + deckOfCards[randomNumber].number;
-    // var targetCart = document.getElementById(nameOfCard);
-    // targetCart.onclick = showAlert;
-    var htmlOutput = '<div class="card" id="card ' + nameOfCard + '" onclick="#">' + nameOfCard + '</div>';
-    $("#game-board").append(htmlOutput);
-  }
-  console.log(shuffledCards);
-  return shuffledCards;
+    for(var j = 0; j < shuffledCards.length; j++){
+      var htmlOutput = '<div class="card" id="' + shuffledCards[j] + '">' + shuffledCards[j] + '</div>';
+      $("#game-board").append(htmlOutput);
+    }
+    console.log(shuffledCards);
+    return shuffledCards;
 }
 
-window.onload = GameBoard();
-
-var cardPairPicked = [];
-
-$(".card").on('click', function(e) {
-  this.style.backgroundColor = "lightgray";
-var cardValue = this.innerHTML;
-
-console.log(cardValue);
-cardPairPicked.push(cardValue);
-
-
-  setTimeout(flipBackCard, 2000);
-
-});
-
-
-function checkArray (arr){
-  if(arr.length == 2){
-    isMatch(arr);
+function shuffleArray(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
   }
+  return array;
 }
 
 
-function isMatch (cardPairPicked){
-  if(cardPairPicked[0] === cardPairPicked[1]){
-  alert("You found a match!");
-  $(".alert").alert('close');
-  
-  } else {
-  alert("Sorry, try again.");
-  // $(".alertTwo").alert();
-  
-  }
-}
+/**
+* Shuffle
+*/
 
-function flipBackCard(){
-  $(".card").css("backgroundColor", "black");
-}
-
-
-// function shuffleArray(array) {
-//     for (var i = array.length - 1; i > 0; i--) {
-//         var j = Math.floor(Math.random() * (i + 1));
-//         var temp = array[i];
-//         array[i] = array[j];
-//         array[j] = temp;
-//     }
-//     return array;
-// }
-
-
-
-
-
-//Shuffle/////////////
- var removeCards = function() {
- //  var gameBoard = document.getElementById('card');
- // gameBoard.parentNode.removeChild(gameBoard);
+ var removeCards = function(){
  $(".card").remove();
 };
 
@@ -113,93 +64,89 @@ function reset(){
 
 $("#shuffleBtn").on("click", reset);
 
-//Shuffle ends//////////
+/**
+* Card Click Trigger
+*/
 
+var cardPairPicked = [];
 
-// flip2Back(){
-//             // Flip the 2 tiles back over
-//             var tile_1 = document.getElementById(memory_tile_ids[0]);
-//             var tile_2 = document.getElementById(memory_tile_ids[1]);
-//             tile_1.style.background = 'url(tile_bg.jpg) no-repeat';
-//                   tile_1.innerHTML = "";
-//             tile_2.style.background = 'url(tile_bg.jpg) no-repeat';
-//                   tile_2.innerHTML = "";
-//             // Clear both arrays
-//             memory_values = [];
-//                   memory_tile_ids = [];
-//         }
-//         setTimeout(flip2Back, 700);
-//       }
-//     }
-//   }
-// }
+$(".card").on('click', function(e) {
+  this.style.backgroundColor = "lightgray";
+  
+  var cardValue = this.innerHTML;
 
+  if(cardPairPicked.length < 2){
+    cardPairPicked.push(cardValue);
+  }
+    console.log(cardPairPicked.length);
+  if(cardPairPicked.length == 2){
+    isMatch(cardPairPicked);
+  }  
+});
 
+function checkTwoInArray(arr, value){
+  if(arr.length == 2){
+    isMatch();
+  } else {
+    arr.push(value);
+  }
+}
 
+/**
+* Check two cards if they are match
+*/
 
-// var cardPairPicked = [];
-  // var cardValue = document.getElementById("two");
-  // cardPairPicked.push(cardValue);
-  //   if(cardValue.html === "" & cardPairPicked.length < 2){
-  //   cardValue.style.background = "lightgray";
-  //     console.log(cardValue);
-  //   }
+function reloadPage() { 
+   location.reload();
+}
 
+var completionCounter = [];
 
+function isMatch (){
+  if(cardPairPicked[0] == cardPairPicked[1]){
+  // alert("You found a match!");
+  console.log(cardPairPicked);
+  
+  completionCounter.push(cardPairPicked);
+  console.log(completionCounter);
+  console.log(completionCounter.length);
+    // for (var i = 0; i <= cardPairPicked.length; i++) {
+    //   var el = document.getElementById(cardPairPicked[i]);
+    //   completionCounter.push(el);
+    //   console.log(completionCounter.length);
+    // }
+    if(completionCounter.length == 6){
+      alert("Great job!!!\nGame Completed!");
+      completionCounter = [];
+      if (window.confirm("Play again?")) { 
+        setTimeout(reloadPage, 800);
+      }
+    }
+ // var cardOne = document.getElementById(cardPairPicked[0]);
+ // var cardTwo = document.getElementById(cardPairPicked[1]);
+  // cardOne.className = "matchedCard";
+  // console.log(cardOne);
+  // cardTwo.className = "matchedCard";
+  // console.log(cardTwo);
+  // console.log(cardPairPicked);
+  cardPairPicked = [];
+  } else {
+    // alert("Sorry, try again.");
+    setTimeout(flipBackCard, 300);
+    cardPairPicked = [];
+    completionCounter = [];
+    console.log(cardPairPicked);
+    }
+}
 
+/**
+* Flip back cards
+*/
 
-// function flipCard(){
- //  var cardPairPicked = [];
- //  var cardValue = document.getAttribute("card-data");
- //  cardPairPicked.push(cardValue);
- //  if(cardValue.html === "" & cardPairPicked.length < 2){
- //    cardValue.style.background = "#FFF";
- //    cardValue.html = cardValue;
- //    console.log(cardValue);
- //  }
- // }
-// 
-// function doTwice(func){
-//   for(var i = 1; i <= 2; i++){
-//     func();
-//   }
-// 
-
-
-
-
-// var htmlOutput = '<div  id=" card ' +  deckOfCards[randomNumber].number + '"><div class="front">?</div><div class="back">' + this.number + '</div></div>';
-
-// <div id="card"> 
-//   <div class="front"> 
-//     Front content
-//   </div> 
-//   <div class="back">
-//     Back content
-//   </div> 
-// </div>
-// Then, call jQuery flip() on it:
-
-// $("#card").flip();
-
-
- // function isTwoCards(arr){
- //  var cardPairPicked = [];
- //  cardPairPicked.push(this.getAttribute("card-data"));
- //  console.log(this.getAttribute("card-data"));
- //  for(var i = 0; i <= arr.length; i++){
- //    if (this.getAttribute("card-data") === arr[i]) {
- //    this.innerHTML = '<div class="card" card-data=' + arr[i] +  '><h1 id="cardTitle">' + arr[i] + '</h1></div>';
- //      // $(".flipped").attr("disabled", "disabled");
- //      // document.getElementByClassName('.flipped').disabled = true;
- //      // $("#originalC").hide();
- //      } 
- //      // if(cardsInPlay.length === 2){
- //      // isMatch(cardsInPlay);
- //      // cardsInPlay = [];
- //    }
- //  }
-
+function flipBackCard(){
+  $(".card").css("backgroundColor", "black");
+//   $(".card").prop("disbaled", false);
+}
 
 
 }); //end .deady////////////////
@@ -208,68 +155,3 @@ $("#shuffleBtn").on("click", reset);
 
 
 
-
-// var makeBorad = function(){
-//   var newBoard = $.create("div");
-//   // $.append(newBoard);
-// };
-
-  //cards
-    //make cards
-    //shuffle cards
-    //reveal cards
-
-    //numOfPairs picked by a user
-    //make two arrs
-
-
-// function Card(numbers){
-//   this.cardNumber = numbers;
-//   this.cardRevealed = false;
-//   // this.makeCards = function(){};
-//   // this.shuffleCards = function(){};
-//   // this.revealCards = function(){};
-// }
-
-  //player
-    //score tracker
-    //
-  
-
-
-
-// function createNumOfArray(numOfPairs){
-//   var numbersArray1 = [];
-//   var numbersArray2 = [];
-//   for(var i = 0; i < numOfPairs; i++){
-//    new  Card.cardNumber = numbersArray1.push(i);
-//     // numbersArray2.push(i);
-//   }
-//   console.log(numbersArray2);
-//   // console.log(numbersArray1);
-// }
-
-
-
-//score trackers
-//Pick num of x
-//Create x pairs of cards
-//flip two cards
-//compaire the two cards
-//  IF the two matches, add 1 points to the player
-//
-//What GameBoard could have?
-  // .. ie a room have tables and chairs
-  // this.resetBoard = function(){};
-  // this.checkCards = function(){};
-  // this.findWinner = function(){};
-  // this.addPlayer = function(){};
-
-
-
-
-
-
-
-
-//

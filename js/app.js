@@ -119,7 +119,9 @@ function isMatch (){
       alert("Great job!!!\nGame Completed!");
       completionCounter = [];
       if (window.confirm("Play again?")) { 
-        setTimeout(reloadPage, 800);
+        setTimeout(reloadPage, 100);
+      } else {
+        window.location.href = "end-page.html";
       }
     }
  // var cardOne = document.getElementById(cardPairPicked[0]);

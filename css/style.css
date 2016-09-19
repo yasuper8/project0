@@ -1,0 +1,85 @@
+
+
+#wrapper{
+	text-align: center;
+}
+
+#header{
+	background-color: #e6e6e6;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}
+
+#game-board{
+	/*position: relative;*/
+	margin: auto 0;
+	width: 70%;
+	text-align: center;
+}
+
+h1{
+	font-family: 'Space Mono', monospace;
+	text-align: center;
+	margin-top: 1rem;
+}
+
+h4{
+	font-family: 'Space Mono', monospace;
+	left: 4rem;
+	padding-top: 1rem;
+	margin-bottom: 1rem
+}
+
+p{
+	font-family: 'Space Mono', monospace;
+	left: 4rem;
+}
+
+.card{
+	height: 6em;
+	width: 4rem;
+	background-color: black;
+	display: inline-block;
+	border-radius: 10px;
+	float: left;
+	padding-left: 1rem;
+	padding-top: 1rem;
+	margin: 2rem 1rem .5rem;
+	font-family: 'Space Mono', monospace;
+	text-align: center;
+}
+
+
+/*.matchedCard{
+	height: 6em;
+	width: 4rem;
+	background-color: lightgray;
+	display: inline-block;
+	border-radius: 10px;
+	float: left;
+	padding-left: 10px;
+	margin: 3.5rem 1rem .5rem;
+	font-family: 'Space Mono', monospace;
+}*/
+
+
+/*#makeCardsBtn{
+	padding:10px;
+	position: absolute;
+	display: block;
+	
+}*/
+
+/*#button{
+	margin-bottom: 2rem;
+	position: absolute;
+	display: block;
+	margin-left:3rem;
+	
+
+}
+#cardTitile{
+	color: white;
+}*/
+
+
